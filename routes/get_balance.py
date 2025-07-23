@@ -18,7 +18,7 @@ def getBalance(handler):
 
     if not uniqueid:
         print("----------------")
-        print(f"\033[93m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-GetBalance] Missing methods\033[0m")
+        print(f"\033[93m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-GetBalance] Missing methods\033[0m")
         print(f"\033[93m{uniqueid}\033[0m")
         print(f"\033[93m{from_header}\033[0m")
         print("----------------")
@@ -27,11 +27,11 @@ def getBalance(handler):
         handler.wfile.write(b"Error: Missing required fields")
         return
     
-    print(f"\033----------------\033[0m")
-    print(f"\033[92m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-GetBalance] Received\033[0m")    
+    print("----------------")
+    print(f"\033[92m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-GetBalance] Received\033[0m")    
     print(f"\033[92m{uniqueid}\033[0m")
     print(f"\033[92m{from_header}\033[0m")
-    print(f"\033----------------\033[0m")
+    print("----------------")
     
     balance = Database.GetBalance(from_header, uniqueid)
     

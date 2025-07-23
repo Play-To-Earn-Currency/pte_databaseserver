@@ -27,7 +27,7 @@ def increment(handler):
 
     if not quantity or not uniqueid:
         print("----------------")
-        print(f"\033[93m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-Increment] Missing methods\033[0m")
+        print(f"\033[93m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-Increment] Missing methods\033[0m")
         print(f"\033[93m{quantity}\033[0m")
         print(f"\033[93m{uniqueid}\033[0m")
         print(f"\033[93m{from_header}\033[0m")
@@ -37,12 +37,12 @@ def increment(handler):
         handler.wfile.write(b"Error: Missing required fields")
         return    
     
-    print(f"\033----------------\033[0m")
-    print(f"\033[92m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-Increment] Received\033[0m")
+    print("----------------")
+    print(f"\033[92m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-Increment] Received\033[0m")
     print(f"\033[92m{quantity}\033[0m")
     print(f"\033[92m{uniqueid}\033[0m")
     print(f"\033[92m{from_header}\033[0m")
-    print(f"\033----------------\033[0m")
+    print("----------------")
     
     if Database.Increment(from_header, quantity, uniqueid):
         handler.send_response(200)

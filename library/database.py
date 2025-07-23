@@ -60,12 +60,12 @@ class Database:
             Database.__connection.commit()
 
             if cursor.rowcount == 0:
-                print(f"\033[33m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-DATABASE] No rows updated for uniqueid: {uniqueid}\033[0m")
+                print(f"\033[33m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-DATABASE] No rows updated for uniqueid: {uniqueid}\033[0m")
                 return False
 
             return True
         except mysql.connector.Error as err:
-            print(f"\033[31m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-DATABASE] Failed to increment: {err}\033[0m")
+            print(f"\033[31m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-DATABASE] Failed to increment: {err}\033[0m")
             return False
         finally:
             cursor.close()
@@ -84,10 +84,10 @@ class Database:
             return True
         except mysql.connector.IntegrityError as err:
             # Unecessary
-            # print(f"\033[33m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-DATABASE] Duplicate record (uniqueid: {uniqueid})\033[0m")
+            # print(f"\033[33m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-DATABASE] Duplicate record (uniqueid: {uniqueid})\033[0m")
             return False
         except mysql.connector.Error as err:
-            print(f"\033[31m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-DATABASE] Error inserting new record: {err}\033[0m")
+            print(f"\033[31m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-DATABASE] Error inserting new record: {err}\033[0m")
             return False
         finally:
             cursor.close()
@@ -105,12 +105,12 @@ class Database:
             Database.__connection.commit()
 
             if cursor.rowcount == 0:
-                print(f"\033[33m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-DATABASE] No lines updated for uniqueid: {uniqueid}\033[0m")
+                print(f"\033[33m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-DATABASE] No lines updated for uniqueid: {uniqueid}\033[0m")
                 return False
             return True
 
         except mysql.connector.Error as err:
-            print(f"\033[31m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-DATABASE] Error updating wallet: {err}\033[0m")
+            print(f"\033[31m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-DATABASE] Error updating wallet: {err}\033[0m")
             return False
         finally:
             cursor.close()
@@ -131,10 +131,10 @@ class Database:
                 wallet = result[0]
                 return wallet
             else:
-                print(f"\033[33m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-DATABASE] No wallet found for uniqueid: {uniqueid}\033[0m")
+                print(f"\033[33m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-DATABASE] No wallet found for uniqueid: {uniqueid}\033[0m")
                 return None
         except mysql.connector.Error as err:
-            print(f"\033[31m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-DATABASE] Error fetching wallet: {err}\033[0m")
+            print(f"\033[31m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-DATABASE] Error fetching wallet: {err}\033[0m")
             return None
         finally:
             cursor.close()
@@ -156,10 +156,10 @@ class Database:
                 converted = brute / Decimal("1000000000000000000")
                 return str(converted.quantize(Decimal("0.01")))
             else:
-                print(f"\033[33m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-DATABASE] No value found for uniqueid: {uniqueid}\033[0m")
+                print(f"\033[33m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-DATABASE] No value found for uniqueid: {uniqueid}\033[0m")
                 return None
         except mysql.connector.Error as err:
-            print(f"\033[31m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-DATABASE] Error fetching value: {err}\033[0m")
+            print(f"\033[31m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-DATABASE] Error fetching value: {err}\033[0m")
             return None
         finally:
             cursor.close()
@@ -180,10 +180,10 @@ class Database:
                 balance = result[0]
                 return balance
             else:
-                print(f"\033[33m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-DATABASE] No value found for uniqueid: {uniqueid}\033[0m")
+                print(f"\033[33m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-DATABASE] No value found for uniqueid: {uniqueid}\033[0m")
                 return None
         except mysql.connector.Error as err:
-            print(f"\033[31m[{datetime.now().strftime('%S/%M/%H/%d/%m/%Y')}-DATABASE] Error fetching value: {err}\033[0m")
+            print(f"\033[31m[{datetime.now().strftime('%H:%M:%S/%d/%m/%Y')}-DATABASE] Error fetching value: {err}\033[0m")
             return None
         finally:
             cursor.close()

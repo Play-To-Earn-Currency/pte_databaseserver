@@ -1,4 +1,5 @@
 from http.server import BaseHTTPRequestHandler
+from urllib.parse import urlparse
 
 # Routes
 from routes.get_balance import getBalance
@@ -10,15 +11,18 @@ from routes.register import register
 
 class Endpoints(BaseHTTPRequestHandler):
     def do_GET(self):
-        if self.path == "/":
+        parsed_url = urlparse(self.path)
+        path = parsed_url.path        
+
+        if path == "/":
             self.send_response(404)
             self.end_headers()
             self.wfile.write(b"404 - Not Found")
-        elif self.path == "/getwallet":
+        elif path == "/getwallet":
             getWallet(self)
-        elif self.path == "/getbalance":
+        elif path == "/getbalance":
             getBalance(self)
-        elif self.path == "/getbalanceraw":
+        elif path == "/getbalanceraw":
             getBalanceRaw(self)
         else:
             self.send_response(404)

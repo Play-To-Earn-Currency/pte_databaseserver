@@ -4,9 +4,11 @@ Creates any http server to handle play to earn database, some games may use this
 ### WARNING
 Do not use open ports for this, this is to be used only with local machines, setup a strong firewall in your system, don't let internet have access to this server.
 
-First run requires internet connection to download mysql package
+First run requires internet connection to download mysql package, after package installation configure your database in ``./config/database.txt``
 
 ### Available Routes:
+All routes requires "from": "gamename", in the header
+
 - /getbalance, GET
 - > Returns user currently balance
 - > Requires "uniqueid" as query parameter
