@@ -1,7 +1,11 @@
 from datetime import datetime
 import json
+import re;
 
 from library.database import Database
+
+def is_valid_wallet(address):
+    return bool(re.fullmatch(r"0x[a-fA-F0-9]{40}", address))
 
 def updateWallet(handler):
     content_length = int(handler.headers.get('Content-Length', 0))
@@ -43,6 +47,11 @@ def updateWallet(handler):
     print(f"\033[92m{uniqueid}\033[0m")
     print(f"\033[92m{from_header}\033[0m")
     print("----------------")
+    
+    if not is_valid_wallet(wallet):
+        handler.send_response(401)
+        handler.end_headers()
+        handler.wfile.write(b"Error: Invalid wallet")
     
     if Database.UpdateWalletAddress(from_header, wallet, uniqueid):
         handler.send_response(200)
